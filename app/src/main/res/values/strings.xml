@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">ScribbleDash</string>
+    <string name="route_home">Home</string>
+    <string name="route_other">Other</string>
 </resources>
