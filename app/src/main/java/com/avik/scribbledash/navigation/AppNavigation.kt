@@ -1,6 +1,5 @@
 package com.avik.scribbledash.navigation
 
-import android.util.Log
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.material3.Icon
@@ -14,13 +13,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination.Companion.hasRoute
 import androidx.navigation.NavDestination.Companion.hierarchy
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.avik.scribbledash.R
-import com.avik.scribbledash.ui.compose.HomeScreen
-import com.avik.scribbledash.ui.compose.OtherScreen
 import kotlinx.serialization.Serializable
 
 sealed interface BottomNavDestination {
@@ -29,6 +23,15 @@ sealed interface BottomNavDestination {
 
     @Serializable
     data object Other : BottomNavDestination
+}
+
+sealed interface HomeNavDestination {
+    @Serializable
+    data object HomeMain : HomeNavDestination
+    @Serializable
+    data object GameModeSelection : HomeNavDestination
+    @Serializable
+    data object DrawScreen : HomeNavDestination
 }
 
 data class BottomNavRoute(
@@ -84,21 +87,6 @@ fun BottomNavigationBar(navController: NavController) {
                     }
                 }
             )
-        }
-    }
-}
-
-@Composable
-fun BottomNavGraph(navController: NavHostController) {
-    NavHost(
-        navController = navController,
-        startDestination = BottomNavDestination.Home
-    ) {
-        composable<BottomNavDestination.Home> {
-            HomeScreen()
-        }
-        composable<BottomNavDestination.Other> {
-            OtherScreen()
         }
     }
 }
